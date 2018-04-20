@@ -124,7 +124,7 @@ function isEqual(a, b) {
     length = a.length
     if (length !== b.length) return false
     while (length--) {
-      if (isEqual(a[length], b[length])) return false
+      if (!isEqual(a[length], b[length])) return false
     }
   } else {
     let keys = Object.keys(a)
