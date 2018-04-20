@@ -7,7 +7,7 @@ const ACTION_TYPE = 'actionType'
 const MARK = '__i'
 
 /* 
- * 整体思路，
+ * 整体思路
  * 1、先给oldTree加上标记MARK
  * 2、复制oldTree，并对oldTree进行增删改操作，生成newTree
  * 3、oldTree和newTree进行对比，把差异追加到newTree上
@@ -46,7 +46,6 @@ class Compare {
       } else {
         // 子对象是否改变
         if (typeof newTree[x] === 'object' && typeof oldTree[x] === 'object') {
-          // console.log(newTree[x], oldTree[x], isEqual(oldTree[x], newTree[x]))
           let is = isEqual(oldTree[x], newTree[x])
           newTree[x][ACTION_TYPE] = is ? newTree[x][ACTION_TYPE] : UPDATE
         }
@@ -84,9 +83,6 @@ function isEqual(a, b) {
   if (a === b) return a !== 0 || 1 / a === 1 / b
 
   // A strict comparison is necessary because `null == undefined`.
-  if (b === null || a === null) {
-    console.log(a, b)
-  }
   if (a == null || b == null) return a === b
 
   let className = toString.call(a)
@@ -136,41 +132,9 @@ function isEqual(a, b) {
     if (Object.keys(b).length !== length) return false
     while (length--) {
       key = keys[length]
-      if (key === 'value1111') {
-        console.log(a, b)
-        console.log(!b.hasOwnProperty(key))
-      }
-      // console.log(key)
       if (!(b.hasOwnProperty(key) && isEqual(a[key], b[key]))) return false
     }
 
     return true
   }
-
-
-
-
-  // // Of course, we can do it use for in 
-  // // Create arrays of property names
-  // var aProps = Object.getOwnPropertyNames(a);
-  // var bProps = Object.getOwnPropertyNames(b);
-
-  // // If number of properties is different,
-  // // objects are not equivalent
-  // if (aProps.length !== bProps.length) {
-  //   return false;
-  // }
-
-  // for (var i = 0; i < aProps.length; i++) {
-  //   var propName = aProps[i];
-  //   // If values of same property are not equal,
-  //   // objects are not equivalent
-  //   if (a[propName] !== b[propName]) {
-  //     return false;
-  //   }
-  // }
-
-  // // If we made it this far, objects
-  // // are considered equivalent
-  // return true;
 }
