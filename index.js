@@ -10,7 +10,7 @@ let oldTree = {
   ],
   obj: {
     actionType: 3,
-    value: 1,
+    value1111: 1,
   },
   children: {
     actionType: 3,
@@ -36,7 +36,7 @@ let oldTree = {
         arr1: 1,
         children: {
           "actionType": 3,
-          a: 1
+          a: 11111
         },
       },
       {
@@ -62,7 +62,7 @@ let newTree = {
   ],
   "obj": {
     "actionType": 3,
-    "value": null,
+    "value1111": null,
     "__i": 1
   },
   "children": {
