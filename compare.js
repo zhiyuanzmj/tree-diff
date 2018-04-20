@@ -134,7 +134,6 @@ function isEqual(a, b) {
       key = keys[length]
       if (!(b.hasOwnProperty(key) && isEqual(a[key], b[key]))) return false
     }
-
-    return true
   }
+  return true
 }
