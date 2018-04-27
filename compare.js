@@ -3,8 +3,8 @@ const CREATE = 1
 const UPDATE = 2
 const UNCHANGED = 3
 
-const ACTION_TYPE = 'actionType'
-const MARK = '__i'
+const ACTION_TYPE = 'action'
+const MARK = '__i__'
 
 /* 
  * 整体思路
@@ -13,6 +13,7 @@ const MARK = '__i'
  * 3、oldTree和newTree进行对比，把差异追加到newTree上
  * 4、最终数据的变化ACTION_TYPE会体现在数据上
  */
+
 class Compare {
   Init(obj, index = 1) {
     if (typeof obj === 'object' && obj !== null) {
@@ -32,10 +33,11 @@ class Compare {
   Diff(oldTree, newTree) {
     let is = isEqual(oldTree, newTree)
     newTree[ACTION_TYPE] = is ? newTree[ACTION_TYPE] : UPDATE
-    this.remove(oldTree, newTree)
-    this.add(oldTree, newTree)
+
+    this.createAndUpdate(oldTree, newTree) // 新增数据和修改数据标记
+    this.delete(oldTree, newTree) // 追加删除数据
   }
-  remove(oldTree, newTree) {
+  createAndUpdate(oldTree, newTree) {
     for (let x in newTree) {
       if (Array.isArray(newTree[x]) && newTree[x].length > 0) {
         newTree[x].forEach(nval => {
@@ -44,18 +46,19 @@ class Compare {
           }
         })
       } else {
-        // 子对象是否改变
+        // 判断数据是否修改了
+        // 判断子对象是{}对象
         if (typeof newTree[x] === 'object' && typeof oldTree[x] === 'object') {
           let is = isEqual(oldTree[x], newTree[x])
           newTree[x][ACTION_TYPE] = is ? newTree[x][ACTION_TYPE] : UPDATE
         }
       }
       if (typeof newTree[x] === 'object' && typeof oldTree[x] === 'object') {
-        this.remove(oldTree[x], newTree[x])
+        this.createAndUpdate(oldTree[x], newTree[x])
       }
     }
   }
-  add(oldTree, newTree) {
+  delete(oldTree, newTree) {
     for (let y in oldTree) {
       if (Array.isArray(oldTree[y]) && oldTree[y].length > 0) {
         let arr = []
@@ -71,7 +74,7 @@ class Compare {
           newTree[y] = newTree[y].concat(arr)
         }
       }
-      this.add(oldTree[y], newTree[y])
+      this.delete(oldTree[y], newTree[y])
     }
   }
 }
@@ -107,7 +110,6 @@ function isEqual(a, b) {
   // className includes '[object Array]', '[object Object]' or '[object Function]'
   let areArrays = className === '[object Array]'
 
-  // 这个地方不是很理解
   if (!areArrays) {
     if (typeof a != 'object' || typeof b != 'object') return false
     var aCtor = a.constructor, bCtor = b.constructor;

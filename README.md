@@ -19,11 +19,11 @@
   let newArr = [
     {
       a: 1,
-      actionType: 3 // 状态不变
+      action: 3 // 状态不变
     },
     {
       b: 2,
-      actionType: 1 // 新增
+      action: 1 // 新增
     }
   ]
 ```
