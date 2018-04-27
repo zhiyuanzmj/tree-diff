@@ -54,7 +54,7 @@ let newTree = {
     {
       action: 3,
       "array1": 1111111,
-      "__i": 1
+      "__i__": 1
     },
     {
       value: 11
@@ -63,7 +63,7 @@ let newTree = {
   "obj": {
     "action": 3,
     "value1111": null,
-    "__i": 1
+    "__i__": 1
   },
   "children": {
     "action": 3,
@@ -77,7 +77,7 @@ let newTree = {
       {
         "action": 3,
         "arr1": 1,
-        "__i": 1
+        "__i__": 1
       },
     ],
     "array2": [
@@ -87,23 +87,23 @@ let newTree = {
         children: {
           "action": 3,
           a: 1,
-          "__i": 1
+          "__i__": 1
         },
-        "__i": 1
+        "__i__": 1
       },
       {
         "action": 3,
         "arr2": 211,
-        "__i": 2
+        "__i__": 2
       },
       {
         "action": 3,
         "arr3": 2,
       }
     ],
-    "__i": 1
+    "__i__": 1
   },
-  "__i": 1
+  "__i__": 1
 }
 const tree = new Compare()
 tree.Init(oldTree)
