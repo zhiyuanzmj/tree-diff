@@ -113,8 +113,14 @@ let old = {
 - 实现
 
 ```
+const DELETE = 0
+const CREATE = 1
+const UPDATE = 2
+const UNCHANGED = 3
+
 const ACTION_TYPE = 'actionType'
 const MARK = '__i__'
+
 class Compare {
   Init (obj, __i__ = 1) {
     // 初始化数据，给数据添加__i__标记
@@ -135,6 +141,7 @@ class Compare {
     // 添加删除类型
   }
 }
+
 function isEqual(a, b) {
   return _.isEqual(a, b) // 参考underscore中isEqual的实现
 }
