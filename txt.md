@@ -1,5 +1,8 @@
 ### JSON树的对比，并且用tag体现差异
 
+- 介绍 
+ - 本文将介绍JS中，两颗新旧JS对象树的对比，A对象经过修改变成B对象，现在要在B对象里，体现数据做了哪些更改，新增，修改还是删除？
+
 - 需求：
   - 有一个表单报文，内容多，且层次比较深。如果提交报文的时候某处更新了，需要告诉后端哪里更新了（后端美言之为了性能，遍历两棵树耗性能），并打上tag（tag有类型）。
   每条数据有一个tag状态的标识action。默认action = 3（未改变）。
@@ -28,6 +31,10 @@
 let old = {
   action: 3,
   val: 1,
+  obj: {
+    action: 3,
+    val: 1,
+  },
   children: [
     {
       action: 3,
@@ -47,6 +54,11 @@ let old = {
   action: 3,
   val: 1,
   __i__: 1,
+  obj: {
+    action: 3,
+    val: 1,
+    __i__: 1,
+  },
   children: [
     {
       action: 3,
@@ -68,6 +80,11 @@ let old = {
   action: 3,
   val: 1,
   __i__: 1,
+  obj: {
+    action: 3,
+    val: 1,
+    __i__: 1,
+  },
   children: [
     {
       action: 3,
@@ -87,6 +104,11 @@ let old = {
   action: 2,
   val: 1,
   __i__: 1,
+  obj: {
+    action: 3, // 这边数据保持不变
+    val: 1,
+    __i__: 1,
+  },
   children: [
     {
       // 这是一条修改的数据
@@ -121,6 +143,7 @@ const UNCHANGED = 3
 const ACTION_TYPE = 'actionType'
 const MARK = '__i__'
 
+// 只是实现主体功能，具体内部实现可以看源码
 class Compare {
   Init (obj, __i__ = 1) {
     // 初始化数据，给数据添加__i__标记
