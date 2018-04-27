@@ -46,7 +46,7 @@ let old = {
 let old = {
   action: 3,
   val: 1,
-  __i__: 1
+  __i__: 1,
   children: [
     {
       action: 3,
@@ -67,12 +67,12 @@ let old = {
 let old = {
   action: 3,
   val: 1,
-  __i__: 1
+  __i__: 1,
   children: [
     {
-      __i__: 1
       action: 3,
-      val: 4
+      val: 4,
+      __i__: 1
     },
     {
       val: 5
@@ -86,23 +86,24 @@ let old = {
 let old = {
   action: 2,
   val: 1,
-  __i__: 1
+  __i__: 1,
   children: [
     {
       // 这是一条修改的数据
-      __i__: 1
       action: 2,
-      val: 4
+      val: 4,
+      __i__: 1
     },
     {
       // 这是一条新增的数据
-      action: 1,
+      action: 0,
       val: 5
     },
     {
       // 这是一条删除的数据
-      action: 1,
-      val: 5
+      action: 0,
+      val: 2,
+      __i__: 2
     }
   ]
 }
